@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsuper/fsuper.dart';
+import './DetailPage.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -63,6 +64,10 @@ class _TabWidgetState extends State<TabWidget> {
   void _tabSelectTour(){
     setState(() {
       _tabSelectPosition = 0;
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return DetailPage();
+      }));
     });
   }
 
