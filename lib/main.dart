@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rosa/Http/HttpUrl.dart';
 import './Pages/HomePage.dart';
+import 'package:rosa/Http/DioUtil.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -36,14 +39,22 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
-  final pages = [ HomePage(),HomePage(),HomePage(),HomePage()];
+  final pages = [HomePage(), HomePage(), HomePage(), HomePage()];
 
   void _onItemTapped(int index) {
+    DioManager.getInstance().get(
+        HttpUrl.now,
+        {"location": "青岛", "key": "ea277e4e200a4df4a662ccb64a4fed63"},
+        (data) {
+
+        },
+        (error) {
+
+        });
     setState(() {
       _selectedIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("home")),
-          BottomNavigationBarItem(icon: Icon(Icons.local_activity), title: Text("home")),
-          BottomNavigationBarItem(icon: Icon(Icons.folder), title: Text("home")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_activity), title: Text("home")),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.folder), title: Text("home")),
           BottomNavigationBarItem(icon: Icon(Icons.mail), title: Text("home")),
         ],
         backgroundColor: Colors.black,
