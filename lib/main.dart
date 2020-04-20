@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rosa/Http/HttpUrl.dart';
 import './Pages/HomePage.dart';
 import 'package:rosa/Http/DioUtil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -45,12 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
     DioManager.getInstance().get(
         HttpUrl.now,
         {"location": "青岛", "key": "ea277e4e200a4df4a662ccb64a4fed63"},
-        (data) {
-
-        },
-        (error) {
-
-        });
+        (data) {},
+        (error) {});
     setState(() {
       _selectedIndex = index;
     });
@@ -58,25 +55,47 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: pages[_selectedIndex],
-      backgroundColor: Colors.white,
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("home")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.local_activity), title: Text("home")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.folder), title: Text("home")),
-          BottomNavigationBarItem(icon: Icon(Icons.mail), title: Text("home")),
-        ],
-        backgroundColor: Colors.black,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.lightBlue,
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.white,
-        onTap: _onItemTapped,
-      ),
-    );
+    DateTime _lastPressedAt; //上次点击时间
+    return new WillPopScope(
+        onWillPop: () async {
+          if (_lastPressedAt == null ||
+              DateTime.now().difference(_lastPressedAt) >
+                  Duration(seconds: 1)) {
+            //两次点击间隔超过1秒则重新计时
+            _lastPressedAt = DateTime.now();
+            Fluttertoast.showToast(
+                msg: "连续按返回键退出应用",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.black54,
+                textColor: Colors.white,
+                fontSize: 16.0);
+            return false;
+          }
+          return true;
+        },
+        child: Scaffold(
+          body: pages[_selectedIndex],
+          backgroundColor: Colors.white,
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home), title: Text("home")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.local_activity), title: Text("home")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.folder), title: Text("home")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.mail), title: Text("home")),
+            ],
+            backgroundColor: Colors.black,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.lightBlue,
+            currentIndex: _selectedIndex,
+            unselectedItemColor: Colors.white,
+            onTap: _onItemTapped,
+          ),
+        ));
   }
 }
