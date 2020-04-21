@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fsuper/fsuper.dart';
 import './DetailPage.dart';
+import './MusicDetail.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -61,7 +62,7 @@ class TabWidget extends StatefulWidget {
 class _TabWidgetState extends State<TabWidget> {
   int _tabSelectPosition = 0;
 
-  void _tabSelectTour(){
+  void _tabSelectTour() {
     setState(() {
       _tabSelectPosition = 0;
       Navigator.of(context)
@@ -71,19 +72,23 @@ class _TabWidgetState extends State<TabWidget> {
     });
   }
 
-  void _tabSelectTrain(){
+  void _tabSelectTrain() {
     setState(() {
       _tabSelectPosition = 1;
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return (MusicDetail());
+      }));
     });
   }
 
-  void _tabSelectFlight(){
+  void _tabSelectFlight() {
     setState(() {
       _tabSelectPosition = 2;
     });
   }
 
-  void _tabSelectHotel(){
+  void _tabSelectHotel() {
     setState(() {
       _tabSelectPosition = 3;
     });
@@ -98,40 +103,48 @@ class _TabWidgetState extends State<TabWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             FSuper(
-              onClick:_tabSelectTour,
+              onClick: _tabSelectTour,
               width: 50,
               height: 120,
               corner: Corner.all(8),
               strokeColor: Colors.white30,
               strokeWidth: 1,
-              backgroundColor: _tabSelectPosition==0?Colors.lightBlue:Colors.transparent,
+              backgroundColor: _tabSelectPosition == 0
+                  ? Colors.lightBlue
+                  : Colors.transparent,
             ),
             FSuper(
-              onClick:_tabSelectTrain,
+              onClick: _tabSelectTrain,
               width: 50,
               height: 120,
               corner: Corner.all(8),
               strokeColor: Colors.white30,
               strokeWidth: 1,
-              backgroundColor: _tabSelectPosition==1?Colors.lightBlue:Colors.transparent,
+              backgroundColor: _tabSelectPosition == 1
+                  ? Colors.lightBlue
+                  : Colors.transparent,
             ),
             FSuper(
-              onClick:_tabSelectFlight,
+              onClick: _tabSelectFlight,
               width: 50,
               height: 120,
               corner: Corner.all(8),
               strokeColor: Colors.white30,
               strokeWidth: 1,
-              backgroundColor: _tabSelectPosition==2?Colors.lightBlue:Colors.transparent,
+              backgroundColor: _tabSelectPosition == 2
+                  ? Colors.lightBlue
+                  : Colors.transparent,
             ),
             FSuper(
-              onClick:_tabSelectHotel,
+              onClick: _tabSelectHotel,
               width: 50,
               height: 120,
               corner: Corner.all(8),
               strokeColor: Colors.white30,
               strokeWidth: 1,
-              backgroundColor: _tabSelectPosition==3?Colors.lightBlue:Colors.transparent,
+              backgroundColor: _tabSelectPosition == 3
+                  ? Colors.lightBlue
+                  : Colors.transparent,
             ),
           ],
         ));

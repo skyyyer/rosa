@@ -25,8 +25,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   fluttertoast: ^4.0.0
   shared_preferences: ^0.5.6+3
+  #布局效果（各种圆角，渐变等）
   fsuper: ^0.1.5
-
+  #  视频播放
+  chewie: ^0.9.10
+  #  网络请求
   dio: ^3.0.9
   dio_cookie_manager: ^1.0.0
 

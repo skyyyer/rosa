@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rosa/Http/HttpUrl.dart';
 import './Pages/HomePage.dart';
 import 'package:rosa/Http/DioUtil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void main() => runApp(MyApp());
+void main(){
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp, //只能纵向
+      DeviceOrientation.portraitDown,//只能纵向
+    ]);
     return MaterialApp(
       title: 'Rosa',
       theme: ThemeData(
@@ -43,11 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
   final pages = [HomePage(), HomePage(), HomePage(), HomePage()];
 
   void _onItemTapped(int index) {
-    DioManager.getInstance().get(
-        HttpUrl.now,
-        {"location": "青岛", "key": "ea277e4e200a4df4a662ccb64a4fed63"},
-        (data) {},
-        (error) {});
     setState(() {
       _selectedIndex = index;
     });
@@ -70,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 timeInSecForIosWeb: 1,
                 backgroundColor: Colors.black54,
                 textColor: Colors.white,
-                fontSize: 16.0);
+                fontSize: 14.0);
             return false;
           }
           return true;
