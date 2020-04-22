@@ -3,10 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:fsuper/fsuper.dart';
 import './DetailPage.dart';
 import './MusicDetail.dart';
+import 'dart:math' as math;
+import 'package:rosa/model/homeBean.dart';
+import 'dart:convert';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String str =
+        "{\"code\": 0,\"msg\": \"\",\"result\": [{\"city_id\": 1,\"city_name\": \"上海\",\"city_cover\": 0},{\"city_id\": 2,\"city_name\": \"巴黎\",\"city_cover\": 0}]}";
+    List<HomeBeanResult> _list =
+        new HomeBeanEntity().fromJson(json.decode(str)).result;
+    _list.addAll(_list);
+
     return Scaffold(
       body: Container(
           width: double.infinity,
@@ -44,13 +53,62 @@ class HomePage extends StatelessWidget {
                       new Text("Search cities,hotels ...")
                     ],
                   )),
-              TabWidget()
+              TabWidget(),
+              Padding(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  verticalDirection: VerticalDirection.up,
+                  children: <Widget>[
+                    Text(
+                      "Popular tours",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      "see all",
+                      style: TextStyle(color: Colors.white30, fontSize: 14),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Container(
+                    height: 200,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _list.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return FSuper(
+                            width: 100,
+                            height: 200,
+                            corner: Corner.all(8),
+                            backgroundImage: AssetImage("images/hong_kong.png"),
+                            child1: Transform.rotate(
+                              //旋转90度
+                              angle: math.pi / 2,
+                              child: Text(
+                                _list[index].cityName,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          );
+                        }),
+                  ))
             ],
           )),
     );
   }
 }
 
+//分类tab
 class TabWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -112,6 +170,17 @@ class _TabWidgetState extends State<TabWidget> {
               backgroundColor: _tabSelectPosition == 0
                   ? Colors.lightBlue
                   : Colors.transparent,
+              child1: Transform.rotate(
+                //旋转90度
+                angle: math.pi / 2,
+                child: Text(
+                  "Tour",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
             FSuper(
               onClick: _tabSelectTrain,
@@ -123,6 +192,17 @@ class _TabWidgetState extends State<TabWidget> {
               backgroundColor: _tabSelectPosition == 1
                   ? Colors.lightBlue
                   : Colors.transparent,
+              child1: Transform.rotate(
+                //旋转90度
+                angle: math.pi / 2,
+                child: Text(
+                  "Train",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
             FSuper(
               onClick: _tabSelectFlight,
@@ -134,6 +214,17 @@ class _TabWidgetState extends State<TabWidget> {
               backgroundColor: _tabSelectPosition == 2
                   ? Colors.lightBlue
                   : Colors.transparent,
+              child1: Transform.rotate(
+                //旋转90度
+                angle: math.pi / 2,
+                child: Text(
+                  "Flight",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
             FSuper(
               onClick: _tabSelectHotel,
@@ -145,6 +236,17 @@ class _TabWidgetState extends State<TabWidget> {
               backgroundColor: _tabSelectPosition == 3
                   ? Colors.lightBlue
                   : Colors.transparent,
+              child1: Transform.rotate(
+                //旋转90度
+                angle: math.pi / 2,
+                child: Text(
+                  "Hotel",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ],
         ));

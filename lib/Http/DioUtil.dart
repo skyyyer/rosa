@@ -40,7 +40,7 @@ class DioManager {
   }
 
   //get请求
-  get(String url, Map<String, dynamic> queryParameters, Function successCallBack,
+  get<T>(String url, Map<String, dynamic> queryParameters, Function successCallBack,
       Function errorCallBack) async {
     _requstHttp(url, successCallBack,
         method: 'get', queryParameters: queryParameters, errorCallBack: errorCallBack);
