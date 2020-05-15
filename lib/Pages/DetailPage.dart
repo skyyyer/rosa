@@ -18,11 +18,13 @@ class DetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(30),
                           bottomRight: Radius.circular(30)),
-                      child: Image.asset(
-                        "images/hong_kong.png",
-                        width: 100.0,
-                        fit: BoxFit.cover,
-                      )),
+                      child: Hero(
+                          tag: 1,
+                          child: Image.asset(
+                            "images/hong_kong.png",
+                            width: 100.0,
+                            fit: BoxFit.cover,
+                          ))),
                 ),
                 Positioned(
                     bottom: 30,
@@ -42,7 +44,7 @@ class DetailPage extends StatelessWidget {
                     bottom: 130,
                     left: 25,
                     child: Text(
-                      "Hong Kong",
+                      "Shang Hai",
                       style: TextStyle(
                           fontSize: 40,
                           color: Colors.white,
@@ -116,7 +118,6 @@ class _HistoryWidgetState extends State<HistoryWidget> {
 
     return content;
   }
-
 
   @override
   Widget build(BuildContext context) {

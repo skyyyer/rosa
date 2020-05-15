@@ -11,10 +11,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String str =
-        "{\"code\": 0,\"msg\": \"\",\"result\": [{\"city_id\": 1,\"city_name\": \"上海\",\"city_cover\": 0},{\"city_id\": 2,\"city_name\": \"巴黎\",\"city_cover\": 0}]}";
+        "{\"code\": 0,\"msg\": \"\",\"result\": [{\"city_id\": 1,\"city_name\": \"上海\",\"city_cover\": 0},{\"city_id\": 3,\"city_name\": \"迈阿密\",\"city_cover\": 0},{\"city_id\": 2,\"city_name\": \"巴黎\",\"city_cover\": 0}]}";
     List<HomeBeanResult> _list =
         new HomeBeanEntity().fromJson(json.decode(str)).result;
-    _list.addAll(_list);
 
     return Scaffold(
       body: Container(
@@ -76,29 +75,41 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.only(top: 20),
                   child: Container(
                     height: 200,
                     child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: _list.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return FSuper(
-                            width: 100,
-                            height: 200,
-                            corner: Corner.all(8),
-                            backgroundImage: AssetImage("images/hong_kong.png"),
-                            child1: Transform.rotate(
-                              //旋转90度
-                              angle: math.pi / 2,
-                              child: Text(
-                                _list[index].cityName,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                          return InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return DetailPage();
+                              }));
+                            },
+                            child: Hero(
+                                tag: _list[index].cityId,
+                                child: FSuper(
+                                  width: 100,
+                                  height: 200,
+                                  margin: EdgeInsets.only(right: 30),
+                                  corner: Corner.all(8),
+                                  backgroundImage:
+                                      AssetImage("images/hong_kong.png"),
+                                  child1: Transform.rotate(
+                                    //旋转90度
+                                    angle: math.pi / 2,
+                                    child: Text(
+                                      _list[index].cityName,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                )),
                           );
                         }),
                   ))
@@ -123,10 +134,6 @@ class _TabWidgetState extends State<TabWidget> {
   void _tabSelectTour() {
     setState(() {
       _tabSelectPosition = 0;
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (BuildContext context) {
-        return DetailPage();
-      }));
     });
   }
 
