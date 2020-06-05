@@ -5,7 +5,7 @@ import './Pages/HomePage.dart';
 import 'package:rosa/Http/DioUtil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-void main(){
+void main() {
   runApp(new MyApp());
 }
 
@@ -15,14 +15,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp, //只能纵向
-      DeviceOrientation.portraitDown,//只能纵向
+      DeviceOrientation.portraitDown, //只能纵向
     ]);
     return MaterialApp(
       title: 'Rosa',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-
       home: MyHomePage(title: 'Rosa'),
     );
   }
@@ -72,6 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           body: pages[_selectedIndex],
           backgroundColor: Colors.white,
+          drawer: Drawer(
+            child: Container(
+              color: Colors.green,
+            ),
+          ),
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
