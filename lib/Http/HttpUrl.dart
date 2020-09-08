@@ -3,10 +3,7 @@
  */
 
 class HttpUrl {
+  static const String baseUrl = "http://testapi.hanpin100.com/";
 
-  static const String baseUrl = "https://free-api.heweather.net/s6/weather/";
-
-
-  static const String now = "https://free-api.heweather.net/s6/weather/now";
-
+  static const String index = baseUrl + "index/index";
 }

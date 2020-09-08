@@ -42,18 +42,18 @@ class DioManager {
   //get请求
   get<T>(String url, Map<String, dynamic> queryParameters, Function successCallBack,
       Function errorCallBack) async {
-    _requstHttp(url, successCallBack,
+    _requestHttp(url, successCallBack,
         method: 'get', queryParameters: queryParameters, errorCallBack: errorCallBack);
   }
 
   //post请求
   post(String url, params, Function successCallBack,
       Function errorCallBack) async {
-    _requstHttp(url, successCallBack,
-        method: 'get', queryParameters: params, errorCallBack: errorCallBack);
+    _requestHttp(url, successCallBack,
+        method: 'post', queryParameters: params, errorCallBack: errorCallBack);
   }
 
-  _requstHttp(String url, Function successCallBack,
+  _requestHttp(String url, Function successCallBack,
       {String method,
       FormData params,
       Map<String, dynamic> queryParameters,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rosa/Http/HttpUrl.dart';
 import './Pages/HomePage.dart';
-import 'package:rosa/Http/DioUtil.dart';
+import 'package:rosa/Http/DioManager.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
@@ -47,8 +47,29 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getInfo();
+  }
+
+  /// 获取数据
+  getInfo() {
+    var param = {'user_id': "10"};
+
+    DioManager.getInstance().post(
+      HttpUrl.index,
+      param,
+      (data) {
+      },
+      (data) {},
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     DateTime _lastPressedAt; //上次点击时间
+
     return new WillPopScope(
         onWillPop: () async {
           if (_lastPressedAt == null ||

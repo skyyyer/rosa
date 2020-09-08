@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              new Container(
+              Container(
                 alignment: Alignment.centerLeft,
                 child: new Text(
                   'Planning your\nown travel',
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.white),
                 ),
               ),
-              new Container(
+              Container(
                   margin: EdgeInsets.only(top: 20),
                   height: 50,
                   padding: EdgeInsets.only(left: 20),
